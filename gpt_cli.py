@@ -1,5 +1,12 @@
 import openai
 
+OPENAI_API_KEY="YOUR OPENAI API KEY"
+OPENAI_MODEL="text-davinci-003"
+OPENAI_MAX_TOKENS=1024
+OPENAI_TEMPERATURE=0.5
+
+
+
 class OpenAIAPI:
     def __init__(self, api_key, model_engine):
         openai.api_key = api_key
@@ -13,9 +20,9 @@ class OpenAIAPI:
         completion = openai.Completion.create(
             engine=self.model_engine,
             prompt=prompt,
-            max_tokens=1024,
+            max_tokens=OPENAI_MAX_TOKENS,
             n=1,
-            temperature=0.5,
+            temperature=OPENAI_TEMPERATURE,
             top_p=1,
             frequency_penalty=0.2,
             presence_penalty=0.2,
@@ -48,7 +55,7 @@ class OpenAIAPI:
             print(f"Error: {e}")
             
 if __name__ == "__main__":
-    api = OpenAIAPI("Your OpenAI API Key", "text-davinci-003")
+    api = OpenAIAPI( OPENAI_API_KEY, OPENAI_MODEL)
     while True:
         prompt = input("Search: ")
         if prompt.strip().lower() == "exit":
